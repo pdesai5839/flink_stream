@@ -2,7 +2,7 @@
 
 Apache Flink is an open-source stream processing framework that provides powerful capabilities for processing and analyzing large-scale data streams in real-time. It offers a unified system for both batch and stream processing, enabling users to build robust, scalable, and fault-tolerant data processing applications.
 
-1. Use Homebrew to install the latest version of Apache Flink. We'll be using version 1.18.1.
+Use Homebrew to install the latest version of Apache Flink. We'll be using version 1.18.1.
 
 `brew install apache-flink`
 
