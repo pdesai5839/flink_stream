@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  jobmanager:
+    image: flink:latest
+    container_name: flink-jobmanager
+    command: jobmanager
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./flink-conf.yaml:/usr/local/Cellar/apache-flink/1.18.1/libexec/conf/flink-conf.yaml
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: jobmanager
+        jobmanager.rpc.port: 6123
+        jobmanager.heap.size: 512m
+        taskmanager.heap.size: 512m
+
+  taskmanager:
+    image: flink:latest
+    container_name: flink-taskmanager
+    command: taskmanager
+    scale: 1
+    depends_on:
+      - jobmanager
+    volumes:
+      - ./flink-conf.yaml:/usr/local/Cellar/apache-flink/1.18.1/libexec/conf/flink-conf.yaml
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
